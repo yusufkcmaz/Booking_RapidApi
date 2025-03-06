@@ -5,7 +5,7 @@
         public class SimpleHotelSearchRequestModel
         {
             public string? destId { get; set; }   // Destinasyon ID'si
-            public string Address { get; set; }    // Adres bilgisi
+           // Adres bilgisi
             public string? city_name { get; set; } // Şehir adı
             public string Country { get; set; }    // Ülke adı
 

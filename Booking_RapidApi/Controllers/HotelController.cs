@@ -9,7 +9,7 @@ namespace Booking_RapidApi.Controllers
     public class HotelController : Controller
     {
         [HttpGet]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             return View();
         }
@@ -20,7 +20,7 @@ namespace Booking_RapidApi.Controllers
 
             var client = new HttpClient();
 
-            // Destinasyon sorgusunu yapalım
+            // Destinasyon sorgusu ve url parametre ekleme.
             var destinationRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -38,19 +38,20 @@ namespace Booking_RapidApi.Controllers
                 var body = await response.Content.ReadAsStringAsync();
                 var values = JsonConvert.DeserializeObject<DestinationHotelViewModel.Rootobject>(body);
 
+                //Doğrudan etkileşimde hata!
                 // Eğer destinasyon verisi bulunmuşsa, destId'yi al
-                if (values?.data != null && values.data.Count() > 0)
+                if (values?.data != null && values.data.Count() > 0)   //
                 {
                     simpleHotel.destId = values.data.First().dest_id; // Alınan dest_id'yi simpleHotel'e ekliyoruz
                 }
                 else
                 {
                     // Hata mesajı döndür
-                    return BadRequest("Destinasyon bulunamadı.");
+                    return BadRequest("Destinasyon id bulunamadı.");
                 }
             }
 
-            // Otel sorgusunu yapalım
+            // Otel sorgusunu yapalım ve url parametre ekleme 
             var hotelRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,

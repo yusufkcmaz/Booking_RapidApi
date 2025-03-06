@@ -26,7 +26,7 @@
             public Property1 property { get; set; }
         }
 
-        public class Property1    //Lazım olan yer
+        public class Property1    //Gerekli Alan
         {
             public int id { get; set; }
             public float latitude { get; set; }

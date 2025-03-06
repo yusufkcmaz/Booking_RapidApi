@@ -5,38 +5,3 @@
     int count = 0;
 }
 
-
-<table class="table table-bordered table-hover">
-    <tr>
-        <td>#</td>
-        <td>Sıralama</td>
-        <td>Sezon </td>
-        <td>Lig Başlığı</td>
-        <td>Yarışma ID</td>
-        <td>Lig Sıralaması</td>
-        <td>Teknik Direktör ID</td>
-
-
-    </tr>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            count++;
-            <tr>
-                <td>@count</td>
-                <td>@item.ranking</td>
-                <td>@item.seasonId</td>
-                <td>@item.leagueTitle</td>
-                <td>@item.competitionId</td>
-                <td>@item.leagueRanking</td>
-                <td>@item.trainerId</td>
-
-
-            </tr>
-        }
-
-
-
-
-    </tbody>
-</table>
