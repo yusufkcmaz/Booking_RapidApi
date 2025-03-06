@@ -1,7 +1,9 @@
 Booking.com Hotel Search App
+---
 Bu proje, RapidAPI üzerinden Booking.com API'yi kullanarak bir şehirdeki otelleri listelemeye yönelik bir uygulamadır. Kullanıcılar, şehir adı, varış ve dönüş tarihleri, yetişkin sayısı ve para birimi gibi bilgileri girerek otel araması yapabilirler.
-
+--
 Özellikler
+-
 Şehir adı girerek otel araması yapın.
 Varış ve dönüş tarihlerini belirleyin.
 Yetişkin sayısını ve para birimini seçin.
@@ -15,3 +17,4 @@ Proje Yapısı
 HotelController: API ile iletişimi sağlayan ana controller. Şehir adı ve tarih bilgisi gönderildiğinde, API'den otel verisi alır.
 Model: SimpleHotelSearchRequestModel kullanıcı girişlerini almak için kullanılır.
 View: Kullanıcıya arama sonuçlarını görsel olarak sunar. Otellerin adı, fiyatı, inceleme puanı ve fotoğrafları listelenir.
+![Ekran görüntüsü 2025-03-06 150758](https://github.com/user-attachments/assets/60978a11-01ec-4d28-aa57-15a0c543a19e)
