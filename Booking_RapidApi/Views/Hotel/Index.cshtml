@@ -40,10 +40,11 @@
  *@
 
 
-        @model SearchHotelViewModel.Rootobject
+    @model SearchHotelViewModel.Rootobject
 
 @{
     ViewData["Title"] = "Hotel Search";
+    int count= 0;
 }
 
 <h2>Hotel Search</h2>
@@ -77,12 +78,13 @@
     <button type="submit">Search Hotels</button>
 </form>
 
-@if (Model?.data?.hotels != null)
+@* @if (Model?.data?.hotels != null && Model.data.hotels.Any())
 {
     <h3>Hotel Results</h3>
     <table>
         <thead>
             <tr>
+                <th>#</th>
                 <th>Hotel Name</th>
                 <th>Price</th>
                 <th>Review Score</th>
@@ -92,14 +94,31 @@
         <tbody>
             @foreach (var hotel in Model.data.hotels)
             {
+                count++;
                 <tr>
-                    
+                    <td>@count</td>
                     <td>@hotel.property.name</td>
-                    <td>@hotel.property.priceBreakdown</td>
+                    <td>
+                        @if (hotel.property.priceBreakdown?.grossPrice != null)
+                        {
+                            @hotel.property.priceBreakdown.grossPrice.value @hotel.property.priceBreakdown.grossPrice.currency
+                        }
+                        else
+                        {
+                            <span>No price available</span>
+                        }
+                    </td>
                     <td>@hotel.property.reviewScore</td>
-                    <td>@hotel.property.photoUrls</td>
-                   
-                    
+                    <td>
+                        @if (hotel.property.photoUrls?.Any() == true)
+                        {
+                            <img src="@hotel.property.photoUrls[0]" alt="@hotel.property.name" style="width:100px;height:auto;" />
+                        }
+                        else
+                        {
+                            <span>No image available</span>
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -108,4 +127,55 @@
 else
 {
     <p>No hotels found. Please modify your search criteria.</p>
+} *@
+
+@if (Model?.data?.hotels != null && Model.data.hotels.Any())
+{
+    <h3 style="font-family: Arial, sans-serif; color: #333;">Hotel Results</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+        <thead>
+            <tr style="background-color: #f4f4f4; text-align: left; color: #333;">
+                <th style="padding: 10px; border: 1px solid #ddd;">#</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Hotel Name</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Price</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Review Score</th>
+                <th style="padding: 10px; border: 1px solid #ddd;">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var hotel in Model.data.hotels)
+            {
+                count++;
+                <tr style="border-bottom: 1px solid #f4f4f4;">
+                    <td style="padding: 8px; text-align: center;">@count</td>
+                    <td style="padding: 8px;">@hotel.property.name</td>
+                    <td style="padding: 8px;">
+                        @if (hotel.property.priceBreakdown?.grossPrice != null)
+                        {
+                            <span>@hotel.property.priceBreakdown.grossPrice.value @hotel.property.priceBreakdown.grossPrice.currency</span>
+                        }
+                        else
+                        {
+                            <span style="color: #888;">No price available</span>
+                        }
+                    </td>
+                    <td style="padding: 8px;">@hotel.property.reviewScore</td>
+                    <td style="padding: 8px; text-align: center;">
+                        @if (hotel.property.photoUrls?.Any() == true)
+                        {
+                            <img src="@hotel.property.photoUrls[0]" alt="@hotel.property.name" style="width: 100px; height: auto; border-radius: 5px;" />
+                        }
+                        else
+                        {
+                            <span style="color: #888;">No image available</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p style="font-family: Arial, sans-serif; color: #e74c3c; font-weight: bold;">No hotels found. Please modify your search criteria.</p>
 }
